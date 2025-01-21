@@ -1,5 +1,4 @@
-import { CiHeart } from "react-icons/ci";
-import { FaPhoneAlt } from "react-icons/fa";
+import { CiHeart, CiSearch } from "react-icons/ci";
 import { FaCartShopping } from "react-icons/fa6";
 
 export const navItems = ["About", "Delivery", "Garant", "Contact", "Blog"];
@@ -7,17 +6,34 @@ export const navItems = ["About", "Delivery", "Garant", "Contact", "Blog"];
 export const navIcons = [
   {
     id: 1,
-    icon: CiHeart, // Komponentni to'g'ridan-to'g'ri saqlaymiz
-    title: "Favorites",
+    icon: CiSearch,
+    title: "Search",
   },
   {
     id: 2,
-    icon: FaPhoneAlt,
-    title: "Call",
+    icon: CiHeart,
+    title: "Favorites",
   },
   {
     id: 3,
     icon: FaCartShopping,
     title: "Basket",
   },
+];
+export const socialMedia = ["VK", "VK", "VK"];
+export const footerInfo = [
+  "Chandeliers",
+  "Lamps",
+  "Wall lights",
+  "Floor lamps",
+  "Accessories",
+  "Table lamps",
+];
+
+export const ulInfo = [
+  "Spots",
+  "Track lights",
+  "Outdoor lights",
+  "Technical lights",
+  "LED lights",
 ];

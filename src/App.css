@@ -1,5 +1,5 @@
 .cotainer{
-  max-width: 1436px;
+  max-width: 1536px;
   margin: 0 auto;
   padding: 32px;
 }
@@ -38,10 +38,16 @@
   .card{
     grid-template-columns: repeat(4, 1fr);
   }
+  .navbar{
+    gap: 40px;
+  }
 }
 @media (max-width: 1130px) {
   .card{
     grid-template-columns: repeat(3, 1fr);
+  }
+  .navbar{
+    display: none;
   }
 }
 @media (max-width: 920px) {
@@ -52,5 +58,8 @@
 @media (max-width: 625px) {
   .card{
     grid-template-columns: 1fr;
+  }
+  .icon{
+    display: none;
   }
 }

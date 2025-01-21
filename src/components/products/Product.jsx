@@ -4,86 +4,101 @@ import Loading from "../loading/Loading";
 import ProdactModal from "./prodact-modal";
 
 const Products = () => {
-  const limit = 5
+  const limit = 5;
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [count, setCount] = useState(0)
-  const [total, setTotal ] = useState(0)
-  const [categories, setCategories] = useState(null)
+  const [categories, setCategories] = useState([]);
+  const [filteredProducts, setFilteredProducts] = useState([]);
+  const [category, setCategory] = useState("All");
+  const [count, setCount] = useState(0);
+  const [oneItem, setOneItem] = useState(null);
 
-  const [oneItem, setOneItem] = useState(null)
+  const handleCategory = (selectedCategory) => {
+    setCategory(selectedCategory);
+    setCount(0);
+    if (selectedCategory === "All") {
+      setFilteredProducts(products.slice(0, limit));
+    } else {
+      const filtered = products.filter(
+        (item) => item.category === selectedCategory
+      );
+      setFilteredProducts(filtered.slice(0, limit));
+    }
+  };
 
-  let [category, setCategory] = useState(null)
-  let [filteredProducts, setFilteredProducts] = useState(null)
-
-  const handleCategory = (param) =>{
-    category = param
-    filteredProducts = products.filter((item) => item.category === category)
-  }
-
-  useEffect(()=>{
-request
-.get("/products/category-list")
-.then(res =>{
-  setCategories(["All", ...res.data]);
-})
-  },[])
+  useEffect(() => {
+    request.get("/products/category-list").then((res) => {
+      setCategories(["All", ...res.data]);
+    });
+  }, []);
 
   useEffect(() => {
     setLoading(true);
     request
-      .get("/products",{
-        params: {
-          limit,
-          skip: count * limit
-        }
+      .get("/products", { params: { limit: 100 } })
+      .then((res) => {
+        setProducts(res.data.products);
+        setFilteredProducts(res.data.products.slice(0, limit));
       })
-      .then((res) =>{
-         setProducts([...products, ...res.data.products])
-        setTotal(res.data.total)
-        })
       .catch((err) => console.log(err))
       .finally(() => setLoading(false));
-  }, [count]);
+  }, []);
+
+  const handleSeeMore = () => {
+    setCount(count + 1);
+    const startIndex = (count + 1) * limit;
+    const endIndex = startIndex + limit;
+    const additionalProducts = category === "All"
+      ? products.slice(startIndex, endIndex)
+      : products.filter((item) => item.category === category).slice(startIndex, endIndex);
+
+    setFilteredProducts((prev) => [...prev, ...additionalProducts]);
+  };
+
   return (
     <div className="cotainer">
-      <h2 className="w-28 h-6 bg-red-500 flex items-center justify-center">Products {total}</h2>
       <div className="category flex py-5 gap-4 overflow-y-hidden w-full">
-        {
-          categories?.map((item) =>( 
-              <button type="button"
-              onClick={()=> handleCategory(item)}
-              className=" whitespace-nowrap block mx-auto mt-4 py-3 px-6 rounded-xl mb-4 text-white bg-gradient-to-r from-cyan-400 via-cyan-500 to-cyan-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium text-sm text-center ountline-none cursor-pointer"
-              key={item}>{item}
-              </button>
-          ))
-        }
+        {categories?.map((item) => (
+          <button
+            type="button"
+            onClick={() => handleCategory(item)}
+            className="whitespace-nowrap block mx-auto py-3 px-6 rounded-xl mb-4 text-white bg-gradient-to-r from-cyan-400 via-cyan-500 to-cyan-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium text-sm text-center cursor-pointer"
+            key={item}
+          >
+            {item}
+          </button>
+        ))}
       </div>
-      <div className="card">
-        {products?.map((product) => (
-          <div key={product.id} className="p-4 flex flex-col items-center font-semibold text-lg shadow-md relative max-w-xs overflow-hidden bg-cover bg-no-repeat hover:shadow-2xl hover:transition duration-300 ease-out ">
+
+      <div className="card flex flex-col items-center justify-center">
+        {filteredProducts.map((product) => (
+          <div
+            key={product.id}
+            className="p-4 flex flex-col items-center font-semibold text-lg shadow-md relative max-w-xs overflow-hidden bg-cover bg-no-repeat hover:shadow-2xl hover:transition duration-300 ease-out"
+          >
             <img
               src={product.thumbnail}
               className="h-[250px] max-w-xs transition duration-300 ease-in-out hover:scale-110"
               alt={product.title}
-              onClick={()=>setOneItem(product)}
+              onClick={() => setOneItem(product)}
             />
             <h2>{product.title}</h2>
           </div>
         ))}
       </div>
 
-      {loading && <Loading count={limit} />}
+      {loading && <Loading />}
 
-      {
-        total > limit * (count + 1 ) &&
-       <button className="block mx-auto mt-4 py-3 px-6 rounded-xl mb-4 text-white bg-gradient-to-r from-cyan-400 via-cyan-500 to-cyan-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium text-sm text-center ountline-none " onClick={()=> setCount(count+1)}>See more</button>
-      }
+      {filteredProducts.length < (category === "All" ? products.length : products.filter((item) => item.category === category).length) && (
+        <button
+          className="block mx-auto mt-4 py-3 px-6 rounded-xl mb-4 text-white bg-gradient-to-r from-cyan-400 via-cyan-500 to-cyan-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium text-sm text-center cursor-pointer"
+          onClick={handleSeeMore}
+        >
+          See more
+        </button>
+      )}
 
-      {
-        oneItem &&
-      <ProdactModal oneItem={oneItem} setOneItem={setOneItem}/>
-      }
+      {oneItem && <ProdactModal oneItem={oneItem} setOneItem={setOneItem} />}
     </div>
   );
 };

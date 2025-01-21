@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const request = axios.create({
-    baseURL: "https://dummyjson.com"
-})
+  baseURL: "https://dummyjson.com",
+});
 
-export {request}
+export { request };
