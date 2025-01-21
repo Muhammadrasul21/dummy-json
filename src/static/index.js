@@ -1,19 +1,23 @@
-export const logo = "Logoo"
+import { CiHeart } from "react-icons/ci";
+import { FaPhoneAlt } from "react-icons/fa";
+import { FaCartShopping } from "react-icons/fa6";
 
-export const USERS = [
-    {
-        id: 1,
-        url: rasm,
-        profession: {
-            title: "HR",
-            bg:"green"
-        },
-        title: "asdasd asd asd",
-        price: 100,
-        name: "John Doe"
-    }
-]
-export const CREATEX = [
-    "A fermentum in morbi pretium aliquam adipiscing donec tempus.",
-    "Vulputate placerat amet pulvinar lorem nisl."
-]
+export const navItems = ["About", "Delivery", "Garant", "Contact", "Blog"];
+
+export const navIcons = [
+  {
+    id: 1,
+    icon: CiHeart, // Komponentni to'g'ridan-to'g'ri saqlaymiz
+    title: "Favorites",
+  },
+  {
+    id: 2,
+    icon: FaPhoneAlt,
+    title: "Call",
+  },
+  {
+    id: 3,
+    icon: FaCartShopping,
+    title: "Basket",
+  },
+];

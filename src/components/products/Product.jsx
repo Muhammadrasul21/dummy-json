@@ -10,7 +10,16 @@ const Products = () => {
   const [count, setCount] = useState(0)
   const [total, setTotal ] = useState(0)
   const [categories, setCategories] = useState(null)
+
   const [oneItem, setOneItem] = useState(null)
+
+  let [category, setCategory] = useState(null)
+  let [filteredProducts, setFilteredProducts] = useState(null)
+
+  const handleCategory = (param) =>{
+    category = param
+    filteredProducts = products.filter((item) => item.category === category)
+  }
 
   useEffect(()=>{
 request
@@ -37,16 +46,17 @@ request
       .finally(() => setLoading(false));
   }, [count]);
   return (
-    <div className="contianer">
+    <div className="cotainer">
       <h2 className="w-28 h-6 bg-red-500 flex items-center justify-center">Products {total}</h2>
       <div className="category flex py-5 gap-4 overflow-y-hidden w-full">
         {
           categories?.map((item) =>( 
-             <div
+              <button type="button"
+              onClick={()=> handleCategory(item)}
               className=" whitespace-nowrap block mx-auto mt-4 py-3 px-6 rounded-xl mb-4 text-white bg-gradient-to-r from-cyan-400 via-cyan-500 to-cyan-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium text-sm text-center ountline-none cursor-pointer"
-               key={item}>{item}</div>
+              key={item}>{item}
+              </button>
           ))
-          
         }
       </div>
       <div className="card">
