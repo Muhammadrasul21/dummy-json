@@ -56,13 +56,13 @@ const Products = () => {
   };
 
   return (
-    <div className="cotainer">
+    <div className="container">
       <div className="category flex py-5 gap-4 overflow-y-hidden w-full">
         {categories?.map((item) => (
           <button
             type="button"
             onClick={() => handleCategory(item)}
-            className="whitespace-nowrap block mx-auto py-3 px-6 rounded-xl mb-4 text-white bg-gradient-to-r from-cyan-400 via-cyan-500 to-cyan-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium text-sm text-center cursor-pointer"
+            className="whitespace-nowrap block mx-auto py-3 px-6 rounded-xl mb-4 text-white bg-gradient-to-r btn"
             key={item}
           >
             {item}
@@ -91,7 +91,7 @@ const Products = () => {
 
       {filteredProducts.length < (category === "All" ? products.length : products.filter((item) => item.category === category).length) && (
         <button
-          className="block mx-auto mt-4 py-3 px-6 rounded-xl mb-4 text-white bg-gradient-to-r from-cyan-400 via-cyan-500 to-cyan-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium text-sm text-center cursor-pointer"
+        className="btn"
           onClick={handleSeeMore}
         >
           See more

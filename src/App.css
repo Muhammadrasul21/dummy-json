@@ -1,4 +1,4 @@
-.cotainer{
+.container{
   max-width: 1536px;
   margin: 0 auto;
   padding: 32px;
@@ -61,5 +61,68 @@
   }
   .icon{
     display: none;
+  }
+}
+.btn {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 1rem;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.75rem;
+  margin-bottom: 1rem;
+  color: white;
+  background-image: linear-gradient(to right, #22d3ee, #06b6d4, #0891b2);
+  font-weight: 500;
+  font-size: 0.875rem;
+  text-align: center;
+  cursor: pointer;
+  transition: background-image 0.3s ease;
+}
+
+.btn:hover {
+  background-image: linear-gradient(to bottom right, #22d3ee, #06b6d4, #0891b2);
+}
+
+.btn:focus {
+  outline: none;
+  box-shadow: 0 0 0 4px rgba(6, 182, 212, 0.5);
+}
+
+@media (prefers-color-scheme: dark) {
+  .btn:focus {
+      box-shadow: 0 0 0 4px rgba(6, 182, 212, 0.8);
+  }
+}
+.swiper-pagination-bullet {
+  background-color: black;
+}
+.swiper-pagination {
+  display: flex !important;
+  justify-content: end !important;
+  position: absolute;
+}
+
+.swiper {
+  position: relative;
+}
+
+@media (max-width: 780px) {
+  .swiper-pagination {
+    justify-content: center !important;
+  }
+}
+.brendSwiper{
+  display: none;
+}
+@media(max-width:640px){
+  .brendSwiper{
+display: flex;
+margin-bottom: 70px;
+  }
+  .swiper-slide{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 50px;
   }
 }

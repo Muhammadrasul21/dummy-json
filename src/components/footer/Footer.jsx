@@ -42,11 +42,14 @@ const Footer = () => {
           </ul>
           <ul className="flex flex-col gap-7">
             <p>Товары</p>
-            {navItems.map((item, index) => (
-              <li className="opacity-50" key={index}>
-                {item}
-              </li>
-            ))}
+            {/* {navItems.map((item) => {<Link
+                key={item.id}
+                to={item.path}
+                className="hover:text-[#2fbbd3] cursor-pointer transition duration-300 ease-in-out"
+              >
+                {item.title}
+              </Link>
+          })} */}
           </ul>
           <ul className="flex flex-col gap-7">
             {ulInfo.map((item, index) => (
