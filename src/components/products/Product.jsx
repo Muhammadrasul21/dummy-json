@@ -20,7 +20,7 @@ const Products = () => {
       setFilteredProducts(products.slice(0, limit));
     } else {
       const filtered = products.filter(
-        (item) => item.category === selectedCategory
+        (item) => item.category === selectedCategory,
       );
       setFilteredProducts(filtered.slice(0, limit));
     }
@@ -48,9 +48,12 @@ const Products = () => {
     setCount(count + 1);
     const startIndex = (count + 1) * limit;
     const endIndex = startIndex + limit;
-    const additionalProducts = category === "All"
-      ? products.slice(startIndex, endIndex)
-      : products.filter((item) => item.category === category).slice(startIndex, endIndex);
+    const additionalProducts =
+      category === "All"
+        ? products.slice(startIndex, endIndex)
+        : products
+            .filter((item) => item.category === category)
+            .slice(startIndex, endIndex);
 
     setFilteredProducts((prev) => [...prev, ...additionalProducts]);
   };
@@ -89,11 +92,11 @@ const Products = () => {
 
       {loading && <Loading />}
 
-      {filteredProducts.length < (category === "All" ? products.length : products.filter((item) => item.category === category).length) && (
-        <button
-        className="btn"
-          onClick={handleSeeMore}
-        >
+      {filteredProducts.length <
+        (category === "All"
+          ? products.length
+          : products.filter((item) => item.category === category).length) && (
+        <button className="btn" onClick={handleSeeMore}>
           See more
         </button>
       )}

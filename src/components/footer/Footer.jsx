@@ -1,6 +1,6 @@
 import React from "react";
 import visa from "../../assets/visa.png";
-import icon from "../../assets/JSON-2.svg"
+import icon from "../../assets/JSON-2.svg";
 import { navItems, socialMedia, footerInfo, ulInfo } from "../../static/index";
 
 const Footer = () => {
@@ -16,10 +16,10 @@ const Footer = () => {
             <p>8 (800) 890-46-56</p>
             <img src={visa} alt="#" className="w-[222px] h-10" />
             <a href="#" className="opacity-40 decoration-auto underline block">
-            Privacy
+              Privacy
             </a>
             <a href="#" className="opacity-40 decoration-auto underline">
-            User Agreement
+              User Agreement
             </a>
             <div className="flex gap-3">
               {socialMedia.map((item, index) => (

@@ -1,13 +1,12 @@
-import React from 'react';
+import React from "react";
 import logo from "../../assets/JSON-2.svg";
-import { navIcons } from '../../static';
-import { navItems } from '../../static';
-import { Link, NavLink } from 'react-router-dom';
+import { navIcons } from "../../static";
+import { navItems } from "../../static";
+import { Link, NavLink } from "react-router-dom";
 
 // console.log()
 
 const Header = () => {
-
   return (
     <div className="container">
       <div className="rounded-xl bg-[#2fbad314] p-4 flex items-center justify-between">
@@ -16,7 +15,7 @@ const Header = () => {
           <p className="font-bold text-2xl">Dummy Json</p>
         </div>
         <div className="navbar flex items-center gap-20 text-xl">
-          {navItems.map((navItems, i) =>{
+          {navItems.map((navItems, i) => {
             return (
               <NavLink
                 key={navItems.id}
@@ -39,7 +38,7 @@ const Header = () => {
                 <p className="text-lg">{iconItem.title}</p>
               </div>
             );
-          })} 
+          })}
         </div>
         <div className="flex sm:hidden flex-col gap-0.5">
           <div className="w-8 h-1 bg-[#07B7D5]"></div>

@@ -1,16 +1,16 @@
 // Layout.jsx
-import React from 'react';
+import React from "react";
 import Header from "./header/Header";
 import Footer from "./footer/Footer";
 
-const Layout = ({children}) => {
+const Layout = ({ children }) => {
   return (
     <>
-      <Header/>
+      <Header />
       {children}
-      <Footer/>
+      <Footer />
     </>
   );
-}
+};
 
 export default Layout;
